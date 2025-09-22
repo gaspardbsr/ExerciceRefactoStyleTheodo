@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from datetime import datetime
+from models import User, UserInfos
 import re
 
 app = Flask(__name__)
@@ -35,6 +36,9 @@ def create_user():
 
     user_id = len(users_db) + 1
     new_user = {'id': user_id, 'name': name, 'email': email}
+    #new_user = User(infos = UserInfos(id = user_id, 
+    #                                  name = name, 
+    #                                  email = email))
     users_db[user_id] = new_user
     return jsonify(new_user), 201
 
