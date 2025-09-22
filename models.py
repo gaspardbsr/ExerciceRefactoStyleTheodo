@@ -3,24 +3,38 @@
 # par exemple, pour valider les données ou gérer la persistance
 
 from datetime import datetime
+from typing import Optional
+
+class UserInfos:
+    id: int
+    name: str
+    email: str
 
 class User:
-    def __init__(self, id, name, email):
-        self.id = id
-        self.name = name
-        self.email = email
+    def __init__(self, infos: UserInfos):
+        self.id = infos.id
+        self.name = infos.name
+        self.email = infos.email
 
     def to_dict(self):
         return {'id': self.id, 'name': self.name, 'email': self.email}
 
+class ArticleInfos:
+    id: int
+    user_id: int
+    title: str
+    content: str
+    tags: Optional[list[str]] = None
+    created_at: Optional[datetime] = datetime.now()
+
 class Article:
-    def __init__(self, id, user_id, title, content, tags=None, created_at=None):
-        self.id = id
-        self.user_id = user_id
-        self.title = title
-        self.content = content
-        self.tags = tags if tags is not None else []
-        self.created_at = created_at if created_at is not None else datetime.now()
+    def __init__(self, infos: ArticleInfos):
+        self.id = infos.id
+        self.user_id = infos.user_id
+        self.title = infos.title
+        self.content = infos.content
+        self.tags = infos.tags
+        self.created_at = infos.created_at
 
     def to_dict(self):
         return {
